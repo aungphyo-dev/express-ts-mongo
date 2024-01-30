@@ -12,12 +12,12 @@ export const register = async (req: express.Request, res: express.Response) => {
     if (validate.success) {
       const salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(password, salt);
-      let user = await createNewUser({
+      const user = await createNewUser({
         username,
         password: hashPassword,
         email,
       });
-      let payload = {
+      const payload = {
         id: user._id,
         username: user.username,
         email: user.email,
