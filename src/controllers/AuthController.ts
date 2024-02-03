@@ -1,5 +1,8 @@
 import express from 'express';
-import { createUserSchema, loginUserSchema } from '../validators/user-validator';
+import {
+  createUserSchema,
+  loginUserSchema,
+} from '../validators/user-validator';
 import bcrypt from 'bcrypt';
 import { createNewUser, getUserByEmail } from '../models/Users';
 import { createJwt } from '../helpers';

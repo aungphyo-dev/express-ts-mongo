@@ -29,7 +29,7 @@ server.listen(process.env['PORT'] ?? 3000, () => {
 });
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env['MONGO_URL'])
   .then(() => console.log('Mongo connected'))
   .catch((error: Error) => console.log(error));
 
