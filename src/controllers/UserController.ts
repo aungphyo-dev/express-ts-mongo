@@ -9,7 +9,7 @@ export const getAllUsers = async (
     const users = await getUsers();
     return res.status(200).json(users);
   } catch (error) {
-    console.log(error);
+    console.log(error, req.baseUrl);
     return res.sendStatus(400);
   }
 };

@@ -5,7 +5,7 @@ export const verifyUserToken = (
   res: Response,
   next: NextFunction
 ) => {
-  let token = req.headers.authorization;
+  let token = req.headers['authorization'];
   if (!token)
     return res.status(401).send('Access Denied / Unauthorized request');
   try {

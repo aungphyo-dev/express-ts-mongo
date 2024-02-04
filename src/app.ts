@@ -1,6 +1,6 @@
 import cors from 'cors';
 import http from 'http';
-import express from 'express';
+import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
@@ -9,19 +9,18 @@ import router from './routes';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
-const app = express();
+const app: Application = express();
 
 app.use(
   cors({
     credentials: true,
   })
 );
-
 app.use(logger('dev'));
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: true }));
 const server = http.createServer(app);
 
 server.listen(process.env['PORT'] ?? 3000, () => {
