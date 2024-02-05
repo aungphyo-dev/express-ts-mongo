@@ -8,6 +8,7 @@ import logger from 'morgan';
 import router from './routes';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { apiVersion } from './helpers';
 dotenv.config();
 const app: Application = express();
 
@@ -25,6 +26,7 @@ const server = http.createServer(app);
 
 server.listen(process.env['PORT'] ?? 3000, () => {
   console.log(`Server running on http://localhost:${process.env.PORT ?? 3000}`);
+  console.log(`Default api route is http://localhost:${process.env.PORT ?? 3000}/api/${apiVersion()}`);
 });
 
 mongoose
@@ -32,5 +34,5 @@ mongoose
   .then(() => console.log('Mongo connected'))
   .catch((error: Error) => console.log(error));
 
-app.use(`/api/v${process.env["API_VERSION"] || 1}`, router());
+app.use(`/api/${apiVersion()}`, router());
 export default app;

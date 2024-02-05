@@ -5,3 +5,4 @@ export const createJwt = (payload: object) => {
     expiresIn: 24 * 60 * 60,
   });
 };
+export const apiVersion = () : string=> (`v${process.env["API_VERSION"] || 1}`)
