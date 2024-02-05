@@ -6,6 +6,10 @@
     "outDir": "dist",
     "sourceMap": true,
     "noImplicitAny": true,
+    "strict": false //if you want to use strict mode,strict : true
   },
-  "include": ["src/**/*", "api/**/*"],
+  "ts-node": {
+    "files": true,
+  },
+  "include": ["src/**/*", "api/**/*"]
 }
