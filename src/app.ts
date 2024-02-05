@@ -32,5 +32,5 @@ mongoose
   .then(() => console.log('Mongo connected'))
   .catch((error: Error) => console.log(error));
 
-app.use('/api', router());
+app.use(`/api/v${process.env["API_VERSION"] || 1}`, router());
 export default app;
