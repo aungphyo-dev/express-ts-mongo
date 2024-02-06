@@ -27,7 +27,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@total-typescript/ts-reset": "^0.5.1",
     "@types/bcrypt": "^5.0.2",
     "@types/body-parser": "^1.19.5",
     "@types/compression": "^1.7.5",

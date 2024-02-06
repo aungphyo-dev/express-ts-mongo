@@ -28,6 +28,8 @@ In `.env`:
 ```.dotenv
 TOKEN_SECRET = **************************
 MONGO_URL = *****************************
+PORT=*******
+API_VERSION=***********
 ```
 
 ### Start the index
@@ -41,5 +43,5 @@ pnpm start
 Running commands with npm `pnpm [command]`
 
 | command | description                                |
-| :------ | :----------------------------------------- |
+|:--------|:-------------------------------------------|
 | `start` | Starts a development instance of the index |
