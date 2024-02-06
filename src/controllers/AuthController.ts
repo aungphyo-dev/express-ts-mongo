@@ -1,24 +1,15 @@
 import express from 'express';
-import {
-  createUserSchema,
-  loginUserSchema,
-} from '../validators/user-validator';
 import bcrypt from 'bcrypt';
 import { createNewUser, getUserByEmail } from '../models/Users';
 import { createJwt } from '../helpers';
-import { SafeParseError } from 'zod';
-
 export const register = async (req: express.Request, res: express.Response) => {
   try {
-    const { username, password, email } = req.body;
-    const validate = createUserSchema.safeParse({ username, password, email });
-    if (validate.success) {
       const salt = await bcrypt.genSalt(10);
-      const hashPassword = await bcrypt.hash(password, salt);
+      const hashPassword = await bcrypt.hash(req.body.password, salt);
       const user = await createNewUser({
-        username,
+        username : req.body.username,
         password: hashPassword,
-        email,
+        email : req.body.email,
       });
       const payload = {
         id: user._id,
@@ -33,10 +24,6 @@ export const register = async (req: express.Request, res: express.Response) => {
         },
         jwt: createJwt(payload),
       });
-    } else {
-      const { error } = validate as SafeParseError<object>;
-      res.status(400).send(error.flatten().fieldErrors);
-    }
   } catch (err) {
     console.log(err);
     res.status(400).send({ message: 'User already existed' });
@@ -44,9 +31,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 };
 export const login = async (req: express.Request, res: express.Response) => {
   try {
-    const { email, password } = req.body;
-    const validate = loginUserSchema.safeParse({ email, password });
-    if (validate.success) {
+    const {email,password} = req.body
       const user = await getUserByEmail(email);
       const check = await bcrypt.compare(password, user.password);
       if (!check)
@@ -66,10 +51,6 @@ export const login = async (req: express.Request, res: express.Response) => {
         },
         jwt: createJwt(payload),
       });
-    } else {
-      const { error } = validate as SafeParseError<object>;
-      res.status(400).send(error.flatten().fieldErrors);
-    }
   } catch (err) {
     console.log(err);
     res.status(400).send({ message: 'Something went wrong!' });

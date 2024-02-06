@@ -21,6 +21,7 @@ app.use(logger('dev'));
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 const server = http.createServer(app);
 
