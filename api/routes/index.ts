@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import users from './users';
-import auth from './auth';
+import users from './user.routes';
+import auth from './auth.routes';
 
 const router = Router();
-const routes = (): Router => {
+export default (): Router => {
   auth(router);
   users(router);
   return router;
 };
-export default routes;

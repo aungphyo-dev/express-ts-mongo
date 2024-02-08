@@ -42,6 +42,7 @@ pnpm start
 
 Running commands with npm `pnpm [command]`
 
-| command | description                                |
-|:--------|:-------------------------------------------|
-| `start` | Starts a development instance of the index |
+| command | description          |
+| :------ | :------------------- |
+| `dev`   | Starts a development |
+| `build` | Build the api        |

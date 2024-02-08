@@ -1,12 +1,12 @@
 import express from 'express';
-import { deleteUserById, getUsers, getUserById } from '../models/Users';
+import { UserModel } from '../models/user.service';
 
 export const getAllUsers = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
-    const users = await getUsers();
+    const users = await UserModel.find();
     return res.status(200).json(users);
   } catch (error) {
     console.log(error, req.baseUrl);
@@ -16,7 +16,7 @@ export const getAllUsers = async (
 export const getUser = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;
-    const user = await getUserById(id);
+    const user = await UserModel.findById(id);
     return res.status(200).json({
       username: user.username,
       email: user.email,
@@ -32,7 +32,7 @@ export const deleteUser = async (
 ) => {
   try {
     const { id } = req.params;
-    await deleteUserById(id);
+    await UserModel.findOneAndDelete({ _id: id });
     return res.status(204).json({ message: 'Delete user successfully!' }).end();
   } catch (error) {
     console.log(error);
@@ -52,7 +52,7 @@ export const updateUser = async (
       return res.sendStatus(400);
     }
 
-    const user = await getUserById(id);
+    const user = await UserModel.findById(id);
 
     user.username = username;
     user.email = email;
