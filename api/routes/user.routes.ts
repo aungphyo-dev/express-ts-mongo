@@ -5,15 +5,12 @@ import {
   updateUser,
   getUser,
 } from '../controllers/user.controller';
-import {
-  isOwnerOrSuperAdmin,
-  verifyUserToken,
-} from '../middlewares/authenticate';
+import { isOwner, verifyUserToken } from '../middlewares/authenticate';
 
 //routes are private
 export default (router: express.Router) => {
-  router.get('/users', verifyUserToken, isOwnerOrSuperAdmin, getAllUsers);
-  router.get('/users/:id', verifyUserToken, isOwnerOrSuperAdmin, getUser);
-  router.delete('/users/:id', verifyUserToken, isOwnerOrSuperAdmin, deleteUser);
-  router.put('/users/:id', verifyUserToken, isOwnerOrSuperAdmin, updateUser);
+  router.get('/users', verifyUserToken, getAllUsers);
+  router.get('/users/:id', verifyUserToken, getUser);
+  router.delete('/users/:id', verifyUserToken, isOwner, deleteUser);
+  router.put('/users/:id', verifyUserToken, isOwner, updateUser);
 };

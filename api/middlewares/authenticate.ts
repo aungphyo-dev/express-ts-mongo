@@ -14,21 +14,17 @@ export const verifyUserToken = (
       return res.status(401).send('Unauthorized request');
     const verifiedUser = jwt.verify(token, process.env.TOKEN_SECRET); // config.TOKEN_SECRET => 'secretKey'
     if (!verifiedUser) return res.status(401).send('Unauthorized request');
-    req.body.localsUser = verifiedUser;
+    req.body.tokenUser = verifiedUser;
     next();
   } catch (error) {
     console.log(error);
     res.status(401).send('Unauthorized | Invalid Token');
   }
 };
-export const isOwnerOrSuperAdmin = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const isOwner = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
-    if (id !== req.body.localsUser.id || !req.body.localsUser.superAdmin)
+    if (id !== req.body.tokenUser._id)
       return res.status(401).send('Access Denied / Unauthorized request');
     next();
   } catch (error) {

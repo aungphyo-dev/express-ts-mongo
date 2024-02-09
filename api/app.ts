@@ -25,15 +25,13 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(`/api/${apiVersion()}`, router());
 const server = http.createServer(app);
-
-server.listen(process.env['PORT'] ?? 3000, async () => {
+const port = process.env.PORT || '3000';
+server.listen(port, async () => {
   try {
-    await mongoose.connect(process.env['MONGO_URL']);
+    await mongoose.connect(process.env['MONGO_URL'] as string);
+    console.log(`Server running on http://localhost:${port} ✨`);
     console.log(
-      `Server running on http://localhost:${process.env.PORT ?? 3000} ✨`
-    );
-    console.log(
-      `Default api route is http://localhost:${process.env.PORT ?? 3000}/api/${apiVersion()} 🌏`
+      `Default api route is http://localhost:${port}/api/${apiVersion()} 🌏`
     );
     console.log('Mongo connected 🦄');
   } catch (error) {
