@@ -2,9 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 export const createJwt = (payload: object) => {
-  return jwt.sign(payload, process.env['TOKEN_SECRET'] as string, {
-    expiresIn: 24 * 60 * 60,
-  });
+  return jwt.sign(payload, process.env['TOKEN_SECRET'] as string);
 };
 export const passwordHash = async (password: string) => {
   const salt = await bcrypt.genSalt(10);
