@@ -4,7 +4,7 @@
   "description": "Features:",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only api/app.ts",
+    "dev": "ts-node-dev --respawn --transpile-only api",
     "build": "tsc",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",

@@ -25,7 +25,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(`/api/${apiVersion()}`, router());
 const server = http.createServer(app);
-const port = process.env.PORT || '3000';
+const port = process.env['PORT'] || '3000';
 server.listen(port, async () => {
   try {
     await mongoose.connect(process.env['MONGO_URL'] as string);
