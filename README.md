@@ -7,12 +7,12 @@
 
 ### Prerequisites
 
-**Node version 18.x**
+**Node version 20.x**
 
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/aungpyaephyo1412/express-ts-template.git
+git clone https://github.com/aungpyaephyo1412/express-ts-mongo.git
 ```
 
 ### Install packages
@@ -26,16 +26,16 @@ pnpm i
 In `.env`:
 
 ```.dotenv
-TOKEN_SECRET = **************************
-MONGO_URL = *****************************
 PORT=*******
+MONGO_URL = *****************************
 API_VERSION=***********
+TOKEN_SECRET = **************************
 ```
 
 ### Start the index
 
 ```shell
-pnpm start
+pnpm dev
 ```
 
 ## Available commands

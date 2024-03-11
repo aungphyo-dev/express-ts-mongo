@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only api",
-    "build": "tsc",
+    "build": "tsup api/index.ts --format esm --dts --minify --clean --sourcemap",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint . --ext .ts"
